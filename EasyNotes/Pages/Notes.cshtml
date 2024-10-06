@@ -1,0 +1,224 @@
+﻿@page
+@model EasyNotes.Pages.NotesModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="assets/css/main.css">
+    <title>Заметки</title>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="assets/images/logo.png" alt="Логотип">
+            </div>
+            <div class="buttons">
+                <ul class="nav-links">
+                    <li><a href="Index">Главная</a></li>
+                    <li><a href="About">О нас</a></li>
+                    <li><a href="Notes">Заметки</a></li>
+                </ul>
+                <div class="profile-icon">
+                    <a href="Profile">
+                        <svg width="60" height="60" viewBox="0 0 65 65" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_9_8256)">
+                                <path d="M46.9677 34.5352C49.7787 31.6828 51.6839 28.0631 52.4436 24.131C53.2034 20.1989 52.7838 16.13 51.2378 12.4357C49.6917 8.7414 47.0881 5.58654 43.7541 3.36769C40.4202 1.14884 36.5048 -0.0349884 32.5 -0.0349884C28.4952 -0.0349884 24.5798 1.14884 21.2459 3.36769C17.9119 5.58654 15.3083 8.7414 13.7622 12.4357C12.2162 16.13 11.7966 20.1989 12.5564 24.131C13.3161 28.0631 15.2212 31.6828 18.0323 34.5352C12.7261 36.6211 8.16954 40.2539 4.95399 44.962C1.73843 49.6701 0.0124194 55.2361 6.53057e-07 60.9375C-0.000301966 61.4711 0.104571 61.9995 0.308624 62.4925C0.512676 62.9855 0.811906 63.4335 1.1892 63.8108C1.5665 64.1881 2.01447 64.4873 2.50749 64.6914C3.00051 64.8954 3.52892 65.0003 4.0625 65H60.9375C61.4711 65.0003 61.9995 64.8954 62.4925 64.6914C62.9855 64.4873 63.4335 64.1881 63.8108 63.8108C64.1881 63.4335 64.4873 62.9855 64.6914 62.4925C64.8954 61.9995 65.0003 61.4711 65 60.9375C64.9876 55.2361 63.2616 49.6701 60.046 44.962C56.8305 40.2539 52.2739 36.6211 46.9677 34.5352ZM32.5 8.125C34.9105 8.125 37.2668 8.83978 39.271 10.179C41.2752 11.5181 42.8373 13.4216 43.7598 15.6485C44.6822 17.8755 44.9236 20.326 44.4533 22.6902C43.9831 25.0543 42.8223 27.2259 41.1179 28.9304C39.4134 30.6348 37.2418 31.7956 34.8777 32.2658C32.5135 32.7361 30.063 32.4947 27.836 31.5723C25.6091 30.6498 23.7056 29.0877 22.3665 27.0835C21.0273 25.0793 20.3125 22.723 20.3125 20.3125C20.3161 17.0813 21.6013 13.9834 23.8861 11.6986C26.1709 9.41377 29.2688 8.12858 32.5 8.125ZM8.52969 56.875C9.47363 52.2903 11.9688 48.1711 15.595 45.2112C19.2212 42.2513 23.7567 40.6316 28.4375 40.625H36.5625C41.2433 40.6316 45.7788 42.2513 49.405 45.2112C53.0312 48.1711 55.5264 52.2903 56.4703 56.875H8.52969Z" />
+                            </g>
+                            <defs>
+                                <clipPath id="clip0_9_8256">
+                                    <rect width="65" height="65" />
+                                </clipPath>
+                            </defs>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </header>
+    <main>
+        <div class="flex-container" style="max-width: 50%; display: flex; align-items: center; justify-content: space-between;">
+            <p class="flex-text" style="font-size: 40px; font-weight: 600; margin: 0; text-align: right;">Заметки</p>
+            <a href="#" style="margin-left: 20px;">
+                <img style="width: 70px; height: 70px;" src="assets/images/add.png" alt="add" id="createNote">
+            </a>
+            <a href="History" style="margin-left: auto;">
+                <img style="width: 70px; height: 70px;" src="assets/images/history.png" alt="history">
+            </a>
+        </div>
+        <div class="empty-notes-message" id="noNotes" style="display: none; text-align: center; margin-top: -100px">
+            <img src="assets/images/no_notes.png" alt="No Notes" style="width: 40%; height: 40%;">
+        </div>
+        <div class="notes">
+            <div id="createModal" class="modal">
+                <div class="modal-content">
+                    <h3>Создать заметку</h3>
+                    <form id="addForm">
+                        <input type="text" id="createNoteTitle" placeholder="Заголовок заметки" required>
+                        <textarea id="createNoteContent" placeholder="Содержимое заметки" required></textarea>
+                        <div class="modal-buttons">
+                            <button type="submit" id="saveCreate">Сохранить</button>
+                            <button type="button" id="cancelCreate">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="editModal" class="modal">
+                <div class="modal-content">
+                    <h3>Редактировать заметку</h3>
+                    <form id="editForm">
+                        <input type="text" id="noteTitle" placeholder="Заголовок заметки" required>
+                        <textarea id="noteContent" placeholder="Содержимое заметки" required></textarea>
+                        <div class="modal-buttons">
+                            <button id="saveEdit">Сохранить</button>
+                            <button id="cancelEdit">Отмена</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div id="confirmationModal" class="modal">
+                <div class="modal-content">
+                    <h3>Вы уверены?</h3>
+                    <div class="modal-buttons">
+                        <button id="confirmDelete" style="margin-right: 15px">Да</button>
+                        <button id="cancelDelete">Отмена</button>
+                    </div>
+                </div>
+            </div>
+            <div class="note-card" id="note2">
+                <div class="note-content">
+                    <h3>Заголовок</h3>
+                    <p>s dis. Nulla laoreet est hac nullam; sagittis netus aptent nec. Vitae himenaeos accumsan ridiculus enim ornare ex fringilla porttitor. Pharetra nascetur tempor interdum amet consectetur, vulputate netus malesuada.</p>
+                </div>
+                <div class="note-actions">
+                    <a href="check_this_note" id="sendToHistory"><img style="width: 45px; height: 45px;" src="assets/images/check.png" alt="check"></a>
+                    <a href="edit_this_note" id="editNote"><img style="width: 45px; height: 45px;" src="assets/images/edit.png" alt="edit"></a>
+                    <a href="delete_this_note" id="deleteNote"><img style="width: 45px; height: 45px;" src="assets/images/delete.png" alt="delete"></a>
+                </div>
+            </div>
+            <div class="note-card" id="note2">
+                <div class="note-content">
+                    <h3>Заголовок</h3>
+                    <p>s dis. Nulla laoreet est hac nullam; sagittis netus aptent nec. Vitae himenaeos accumsan ridiculus enim ornare ex fringilla porttitor. Pharetra nascetur tempor interdum amet consectetur, vulputate netus malesuada.</p>
+                </div>
+                <div class="note-actions">
+                    <a href="check_this_note" id="sendToHistory"><img style="width: 45px; height: 45px;" src="assets/images/check.png" alt="check"></a>
+                    <a href="edit_this_note" id="editNote"><img style="width: 45px; height: 45px;" src="assets/images/edit.png" alt="edit"></a>
+                    <a href="delete_this_note" id="deleteNote"><img style="width: 45px; height: 45px;" src="assets/images/delete.png" alt="delete"></a>
+                </div>
+            </div>
+            <div class="note-card" id="note2">
+                <div class="note-content">
+                    <h3>Заголовок</h3>
+                    <p>s dis. Nulla laoreet est hac nullam; sagittis netus aptent nec. Vitae himenaeos accumsan ridiculus enim ornare ex fringilla porttitor. Pharetra nascetur tempor interdum amet consectetur, vulputate netus malesuada.</p>
+                </div>
+                <div class="note-actions">
+                    <a href="check_this_note" id="sendToHistory"><img style="width: 45px; height: 45px;" src="assets/images/check.png" alt="check"></a>
+                    <a href="edit_this_note" id="editNote"><img style="width: 45px; height: 45px;" src="assets/images/edit.png" alt="edit"></a>
+                    <a href="delete_this_note" id="deleteNote"><img style="width: 45px; height: 45px;" src="assets/images/delete.png" alt="delete"></a>
+                </div>
+            </div>
+            <div class="note-card" id="note2">
+                <div class="note-content">
+                    <h3>Заголовок</h3>
+                    <p>s dis. Nulla laoreet est hac nullam; sagittis netus aptent nec. Vitae himenaeos accumsan ridiculus enim ornare ex fringilla porttitor. Pharetra nascetur tempor interdum amet consectetur, vulputate netus malesuada.</p>
+                </div>
+                <div class="note-actions">
+                    <a href="check_this_note" id="sendToHistory"><img style="width: 45px; height: 45px;" src="assets/images/check.png" alt="check"></a>
+                    <a href="edit_this_note" id="editNote"><img style="width: 45px; height: 45px;" src="assets/images/edit.png" alt="edit"></a>
+                    <a href="delete_this_note" id="deleteNote"><img style="width: 45px; height: 45px;" src="assets/images/delete.png" alt="delete"></a>
+                </div>
+            </div>
+        </div>
+
+        <script>
+            const colors = [
+                "#E98A84",
+                "#E19842",
+                "#50936B",
+                "#ADBD48",
+                "#CEA3A0",
+                "#D0938F",
+                "#DDDF64",
+                "#6CB2B7"
+            ];
+
+            const noteCards = document.querySelectorAll('.note-card');
+
+            noteCards.forEach((noteCard, index) => {
+                noteCard.style.backgroundColor = colors[index % colors.length];
+            });
+
+            document.getElementById('deleteNote').addEventListener('click', function(event) {
+                event.preventDefault(); // Отменить стандартное действие ссылки
+                document.getElementById('confirmationModal').style.display = 'flex'; // Показать модальное окно
+            });
+
+            document.getElementById('cancelDelete').addEventListener('click', function() {
+                document.getElementById('confirmationModal').style.display = 'none'; // Скрыть модальное окно
+            });
+
+            document.getElementById('confirmDelete').addEventListener('click', function() {
+                alert('Удаление заметки...');
+                document.getElementById('confirmationModal').style.display = 'none';
+            });
+
+            ///////////////////////////////////////
+            document.getElementById('editNote').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById('noteTitle').value = "123";
+                document.getElementById('noteContent').value = "123";
+                document.getElementById('editModal').style.display = 'flex';
+            });
+
+            document.getElementById('cancelEdit').addEventListener('click', function() {
+                document.getElementById('editModal').style.display = 'none';
+            });
+
+
+            document.getElementById('saveEdit').addEventListener('click', function(event) {
+                alert("Редактирование заметки");
+                event.preventDefault();
+                document.getElementById('editModal').style.display = 'none';
+            });
+
+            ////////////////////////////////////////////////////////////////////////
+            document.getElementById('createNote').addEventListener('click', function(event) {
+                event.preventDefault();
+                document.getElementById('createNoteTitle').value = "123";
+                document.getElementById('createNoteContent').value = "123";
+                document.getElementById('createModal').style.display = 'flex';
+            });
+
+            document.getElementById('cancelCreate').addEventListener('click', function() {
+                document.getElementById('createModal').style.display = 'none';
+            });
+
+
+            document.getElementById('saveCreate').addEventListener('click', function(event) {
+                alert("Создание заметки");
+                event.preventDefault();
+                document.getElementById('createModal').style.display = 'none';
+            });
+            ////////////////////////////////////////////////////////////////////////
+
+
+            function checkNotes() {
+                const noteCards = document.querySelectorAll('.note-card');
+                const emptyMessage = document.getElementById('noNotes');
+                if (noteCards.length === 0) {
+                    emptyMessage.style.display = 'block';
+                } else {
+                    emptyMessage.style.display = 'none';
+                }
+            }
+            window.onload = checkNotes;
+        </script>
+    </main>
+
+</body>
+</html>

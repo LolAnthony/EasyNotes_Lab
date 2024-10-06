@@ -1,0 +1,38 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\assets\images\add.png" />
+    <None Include="wwwroot\assets\images\back.png" />
+    <None Include="wwwroot\assets\images\check.png" />
+    <None Include="wwwroot\assets\images\delete.png" />
+    <None Include="wwwroot\assets\images\edit.png" />
+    <None Include="wwwroot\assets\images\eye.png" />
+    <None Include="wwwroot\assets\images\history.png" />
+    <None Include="wwwroot\assets\images\img1.png" />
+    <None Include="wwwroot\assets\images\img2.png" />
+    <None Include="wwwroot\assets\images\img3.png" />
+    <None Include="wwwroot\assets\images\img4.png" />
+    <None Include="wwwroot\assets\images\logo.png" />
+    <None Include="wwwroot\assets\images\no_notes.png" />
+    <None Include="wwwroot\assets\images\profile-icon.svg" />
+    <None Include="wwwroot\assets\images\thanks.png" />
+    <None Include="wwwroot\assets\css\main.css" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="9.0.0-rc.1.24451.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="9.0.0-rc.1.24451.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="9.0.0-rc.1.24451.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.0-rc.1.24451.1">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
+
+</Project>
